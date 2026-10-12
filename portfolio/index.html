@@ -8,6 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script>
+      (function() {
+        var saved = localStorage.getItem('portfolio-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
   </head>
 
   <body>
@@ -20,6 +28,11 @@
         <a href="#certifications">Certifications</a>
         <a href="#projects">Labs &amp; Projects</a>
         <a href="#contact">Contact</a>
+        <button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark and light theme" title="Toggle theme">
+          <span class="theme-icon sun-icon" aria-hidden="true">☀️</span>
+          <span class="theme-icon moon-icon" aria-hidden="true">🌙</span>
+          <span class="theme-text">Dark Mode</span>
+        </button>
       </nav>
     </header>
 
@@ -118,7 +131,7 @@
           <span class="status-badge">
             <span class="status-dot"></span> Open to Employment (Remote)
           </span>
-          <span class="pill-badge">📅 Available April 2026</span>
+          <span class="pill-badge">📅 Available Immediately</span>
           <span class="pill-badge">📍 Calabar, Nigeria (Africa/Lagos)</span>
         </div>
 
@@ -600,13 +613,6 @@
             </div>
           </article>
 
-          <!-- Add More Projects Dropzone Box -->
-          <div class="add-project-callout">
-            <h3>Ready to Add More Projects or Evidence?</h3>
-            <p>
-              To add new coursework or lab evidence, place your screenshot images or PDFs in <code>portfolio/portfolio/assets/</code> and add an <code>&lt;article class="project-card"&gt;</code> card with your evidence links.
-            </p>
-          </div>
         </div>
       </section>
       </main>
@@ -1296,6 +1302,31 @@
             const docM = document.getElementById('docs-modal');
             if (refM) refM.close();
             if (docM) docM.showModal();
+          });
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeText = themeToggleBtn ? themeToggleBtn.querySelector('.theme-text') : null;
+
+        function syncThemeUI(theme) {
+          if (themeText) {
+            themeText.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+          }
+          if (themeToggleBtn) {
+            themeToggleBtn.setAttribute('title', theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+          }
+        }
+
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        syncThemeUI(currentTheme);
+
+        if (themeToggleBtn) {
+          themeToggleBtn.addEventListener('click', function() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const nextTheme = isDark ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('portfolio-theme', nextTheme);
+            syncThemeUI(nextTheme);
           });
         }
       })();
