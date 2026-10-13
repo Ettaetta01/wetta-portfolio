@@ -1,13 +1,7 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "portfolio",
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/portfolio/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/portfolio/$1"
-    }
-  ]
+  "buildCommand": null,
+  "installCommand": null
 }

@@ -83,6 +83,7 @@ body {
   text-decoration: none;
   background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -398,6 +399,7 @@ h1 {
   font-weight: 700;
   background: linear-gradient(135deg, #4f46e5 0%, #0891b2 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0 0 16px;
 }
